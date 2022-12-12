@@ -28,6 +28,7 @@ const environmnet = {
   NODE_ENV,
   MESSAGE: process.env.MESSAGE || "NO Message",
   PORT: Number(process.env.PORT) || 3000,
+  DB_URL: process.env.DB_URL || "NO URL"
 };
 
 export default environmnet;

@@ -5,7 +5,6 @@ const ItemSchema = new Schema({
   price: { type: String, required: true },
   description: { type: String, required: true },
   phoneNumber: { type: String, required: true },
-  image: { type: String, required: false },
 });
 const Item = model("Item", ItemSchema);
 export default Item;

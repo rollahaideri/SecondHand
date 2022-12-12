@@ -3,26 +3,27 @@
 import mongoose from "mongoose";
 import fp from "fastify-plugin";
 import Item from "../model/Item.js";
-import environment from "./enviroment.js";
+import environment from "./environmnet.js";
 
-async function database(fastify, options) {
+async function database(server, options) {
   try {
     mongoose.connection.on("connected", () => {
-      fastify.log.info({ actor: "MongoDB" }, "Connected!!");
+      server.log.info({ actor: "MongoDB" }, "Connected!!");
     });
 
-    mongoose.connection.on("Disconnected", () => {
-      fastify.log.info({ actor: "MongoDB" }, "Disconnected!!");
+    mongoose.connection.on("disconnected", () => {
+      server.log.info({ actor: "MongoDB" }, "Disconnected!!");
     });
 
+    mongoose.set("strictQuery", true);
     await mongoose.connect(environment.DB_URL);
 
     const models = { Item };
 
     // Adding a hook to the Fastify web framework to attach the connection and
     // the Item model to each request.
-    fastify.addHook("onRequest", async (request, response) => {
-      request.db = { models };
+    server.addHook("onRequest", async (request, response) => {
+      request.database = { models };
     });
   } catch (error) {}
 }
