@@ -39,3 +39,25 @@ export async function DeleteItemController(request, response) {
     await response.status(500).send("An error occurred!");
   }
 }
+
+export async function UpdateItemController(request, response) {
+  try {
+    const { Item } = request.database.models;
+    const ItemExist = await Item.findById(request.body._id);
+
+    if (ItemExist === null) {
+      return await response.status(404).send("Item doesn't exist");
+    }
+
+    const updatedItem = await Item.findByIdAndUpdate(
+      request.body._id,
+      request.body,
+      { new: true }
+    );
+
+    return await response.status(200).send(updatedItem);
+  } catch {
+    request.log.error(error);
+    await response.status(500).send("An error accurred");
+  }
+}

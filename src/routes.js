@@ -22,6 +22,13 @@ async function ItemRoutes(server, options) {
     schema: schemas.DeleteItemSchema,
     handler: controllers.DeleteItemController,
   });
+
+  server.route({
+    method: "PUT",
+    url: "/items",
+    schema: schemas.UpdateItemSchema,
+    handler: controllers.UpdateItemController,
+  });
 }
 
 export default ItemRoutes;

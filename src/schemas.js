@@ -66,3 +66,24 @@ export const DeleteItemSchema = {
     },
   },
 };
+
+export const UpdateItemSchema = {
+  body: {
+    type: "object",
+    required: ["title"],
+
+    properties: {
+      title: { description: "Title of the item to update", type: "string" },
+    },
+  },
+  response: {
+    200: {
+      description: "Update status",
+      type: "object",
+      properties: {
+        success: { type: "boolean" },
+        message: { type: "string" },
+      },
+    },
+  },
+};

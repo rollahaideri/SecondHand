@@ -9,7 +9,7 @@ const start = async () => {
   try {
     await server.register(database);
     await server.register(ItemRoutes);
-    await server.listen({ port: environmnet.PORT });
+    await server.listen({ port: environmnet.PORT, host: '0.0.0.0'});
     console.log("server is running!");
   } catch (error) {
     server.log.error(error);
