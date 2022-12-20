@@ -1,3 +1,7 @@
+/**
+ * AddItemSchema is the JSON Schema for the AddItemController function.
+ * It defines the expected request body and response formats for this route.
+ */
 export const AddItemSchema = {
   body: {
     type: "object",

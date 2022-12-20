@@ -6,5 +6,8 @@ const ItemSchema = new Schema({
   description: { type: String, required: true },
   phoneNumber: { type: String, required: true },
 });
+
+// Item is a Mongoose model that represents the Item collection in the database.
+
 const Item = model("Item", ItemSchema);
 export default Item;

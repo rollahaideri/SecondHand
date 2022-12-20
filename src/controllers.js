@@ -1,3 +1,4 @@
+// A controller function that adds a new item to the database.
 export async function AddItemController(request, response) {
   try {
     const { Item } = request.database.models;
@@ -10,6 +11,7 @@ export async function AddItemController(request, response) {
   }
 }
 
+// A controller function that retrieves a list of all items from the database.
 export async function GetItemsController(request, response) {
   try {
     const { Item } = request.database.models;
@@ -22,6 +24,7 @@ export async function GetItemsController(request, response) {
   }
 }
 
+// A controller function that delete a single item from database
 export async function DeleteItemController(request, response) {
   try {
     const { Item } = request.database.models;
@@ -40,24 +43,20 @@ export async function DeleteItemController(request, response) {
   }
 }
 
+// A controller function that update a existing item from database by id.
 export async function UpdateItemController(request, response) {
-  try {
-    const { Item } = request.database.models;
-    const ItemExist = await Item.findById(request.body._id);
+  const { Item } = request.database.models;
+  const ItemExist = await Item.findById(request.body._id);
 
-    if (ItemExist === null) {
-      return await response.status(404).send("Item doesn't exist");
-    }
-
-    const updatedItem = await Item.findByIdAndUpdate(
-      request.body._id,
-      request.body,
-      { new: true }
-    );
-
-    return await response.status(200).send(updatedItem);
-  } catch {
-    request.log.error(error);
-    await response.status(500).send("An error accurred");
+  if (ItemExist === null) {
+    return await response.status(404).send("Item doesn't exist");
   }
+
+  const updatedItem = await Item.findByIdAndUpdate(
+    request.body._id,
+    request.body,
+    { new: true }
+  );
+
+  return await response.status(200).send(updatedItem);
 }
